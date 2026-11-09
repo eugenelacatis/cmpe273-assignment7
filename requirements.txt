@@ -1,0 +1,78 @@
+In this assignment, you will simulate how a distributed system handles event ordering, delayed messages, and stale workers.
+
+You may use Python or Go.
+
+Lab Goal
+Build a small order-processing simulation where an order moves through versioned states such as:
+
+CREATED → PAID → SHIPPED
+Your program should handle events that may arrive late, out of order, or more than once.
+
+Minimum Requirements
+1. Versioned Event Ordering
+Each order update must include:
+
+order_id
+
+version
+
+status
+
+Demonstrate the following delivery order:
+
+version 2
+version 1
+version 2 again
+Your program should:
+
+Wait for the missing version when necessary.
+
+Apply updates in the correct order.
+
+Ignore duplicate updates.
+
+2. Missing Event Test
+Send only a later version while an earlier version is missing.
+
+Show that:
+
+The order does not incorrectly jump ahead.
+
+The missing version is detected or recorded as pending.
+
+3. Stale Worker Test
+Simulate two workers trying to update the same order.
+
+Assign each worker an increasing fencing token.
+
+Demonstrate that:
+
+The worker with the newer token can update the order.
+
+A worker using an older token is rejected.
+
+README Requirements
+Your README must include:
+
+Instructions for running the program.
+
+Example of correct event ordering.
+
+Evidence of duplicate handling.
+
+Evidence of the missing-event case.
+
+Evidence of stale-worker rejection.
+
+Screenshots, logs, or terminal output showing the implementation working.
+
+A short 3–5 sentence reflection answering:
+
+Why are timestamps alone not enough to guarantee correct event ordering in a distributed system?
+
+Submission
+Submit only your GitHub repository link.
+
+All source code, instructions, results, and evidence must be included in the repository and README.
+
+

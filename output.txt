@@ -1,0 +1,30 @@
+
+=== Test 1: versioned ordering (deliver v2, v1, v2 again) ===
+recv order-1 v2 PAID
+  BUFFER  order-1 v2 PAID     waiting for missing [1]
+recv order-1 v1 CREATED
+  APPLY   order-1 v1 CREATED  NONE -> CREATED
+  APPLY   order-1 v2 PAID     CREATED -> PAID
+recv order-1 v2 PAID
+  IGNORE  order-1 v2 PAID     already applied (current v2)
+state order-1: status=PAID version=2 pending=[] missing=[]
+
+=== Test 2: missing event (deliver v1, then v3; v2 never arrives) ===
+recv order-2 v1 CREATED
+  APPLY   order-2 v1 CREATED  NONE -> CREATED
+recv order-2 v3 SHIPPED
+  BUFFER  order-2 v3 SHIPPED  waiting for missing [2]
+state order-2: status=CREATED version=1 pending=[3] missing=[2]
+
+=== Test 3: stale worker with fencing tokens ===
+  APPLY   order-3 v1 CREATED  NONE -> CREATED
+worker-A acquires lease, token=1
+worker-A pauses (GC / network partition); lease expires
+worker-B acquires lease, token=2
+worker-B writes v2 PAID
+  APPLY   order-3 v2 PAID     CREATED -> PAID
+worker-A wakes up, still thinks it holds the lease, writes v3 SHIPPED
+  REJECT  order-3 v3 SHIPPED  token=1 < highest=2 (stale worker)
+worker-B writes v3 SHIPPED
+  APPLY   order-3 v3 SHIPPED  PAID -> SHIPPED
+state order-3: status=SHIPPED version=3 pending=[] missing=[]

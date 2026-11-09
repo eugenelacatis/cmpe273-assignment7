@@ -1,0 +1,8 @@
+=== RUN   TestOutOfOrderAndDuplicate
+--- PASS: TestOutOfOrderAndDuplicate (0.00s)
+=== RUN   TestMissingEventDoesNotJumpAhead
+--- PASS: TestMissingEventDoesNotJumpAhead (0.00s)
+=== RUN   TestStaleTokenRejected
+--- PASS: TestStaleTokenRejected (0.00s)
+PASS
+ok  	github.com/eugenelacatis/cmpe259-assignment7	(cached)
