@@ -5,4 +5,4 @@
 === RUN   TestStaleTokenRejected
 --- PASS: TestStaleTokenRejected (0.00s)
 PASS
-ok  	github.com/eugenelacatis/cmpe259-assignment7	(cached)
+ok  	github.com/eugenelacatis/cmpe273-assignment7	0.903s

@@ -13,8 +13,8 @@ Events can arrive late, out of order, or more than once. Workers that update ord
 Requires Go 1.21 or newer.
 
 ```bash
-git clone https://github.com/eugenelacatis/cmpe259-assignment7.git
-cd cmpe259-assignment7
+git clone https://github.com/eugenelacatis/cmpe273-assignment7.git
+cd cmpe273-assignment7
 go run .        # runs all three scenarios
 go test -v ./...  # runs the unit tests
 ```
@@ -105,7 +105,7 @@ From [`test_output.txt`](test_output.txt):
 === RUN   TestStaleTokenRejected
 --- PASS: TestStaleTokenRejected (0.00s)
 PASS
-ok  	github.com/eugenelacatis/cmpe259-assignment7	0.182s
+ok  	github.com/eugenelacatis/cmpe273-assignment7	0.182s
 ```
 
 ## Reflection
